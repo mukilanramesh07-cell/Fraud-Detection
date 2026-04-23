@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import pickleimport joblib
 
+model = joblib.load("model.pkl")
+scaler = joblib.load("scaler.pkl")
 # -------------------------------
 # Load model & scaler
 # -------------------------------

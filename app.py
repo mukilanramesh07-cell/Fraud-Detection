@@ -1,10 +1,12 @@
-import os
-st.write("Files in directory:", os.listdir())
-
 import streamlit as st
 import pandas as pd
 import joblib
 import os
+
+# -------------------------------
+# Debug: show files
+# -------------------------------
+st.write("Files in directory:", os.listdir())
 
 # -------------------------------
 # Check files exist
@@ -18,12 +20,13 @@ if not os.path.exists("scaler.pkl"):
     st.stop()
 
 # -------------------------------
-# Load model & scaler (ONLY ONCE)
+# Load model & scaler
 # -------------------------------
 model = joblib.load("model.pkl")
 scaler = joblib.load("scaler.pkl")
+
 # -------------------------------
-# Feature list (must match training)
+# Feature list
 # -------------------------------
 features = [
     'loan_amount',
@@ -64,7 +67,6 @@ if st.button("Check Risk"):
         dtir1, property_value, term, open_credit, age
     ]], columns=features)
 
-    # Apply scaling (IMPORTANT)
     input_scaled = scaler.transform(input_data)
 
     prediction = model.predict(input_scaled)[0]

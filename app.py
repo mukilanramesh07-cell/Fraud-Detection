@@ -1,14 +1,14 @@
+import os
+st.write("Files in directory:", os.listdir())
+
 import streamlit as st
 import pandas as pd
-import pickleimport joblib
-
-model = joblib.load("model.pkl")
-scaler = joblib.load("scaler.pkl")
-# -------------------------------
-# Load model & scaler
-# -------------------------------
+import joblib
 import os
 
+# -------------------------------
+# Check files exist
+# -------------------------------
 if not os.path.exists("model.pkl"):
     st.error("model.pkl not found")
     st.stop()
@@ -17,9 +17,11 @@ if not os.path.exists("scaler.pkl"):
     st.error("scaler.pkl not found")
     st.stop()
 
-model = pickle.load(open("model.pkl", "rb"))
-scaler = pickle.load(open("scaler.pkl", "rb"))
-
+# -------------------------------
+# Load model & scaler (ONLY ONCE)
+# -------------------------------
+model = joblib.load("model.pkl")
+scaler = joblib.load("scaler.pkl")
 # -------------------------------
 # Feature list (must match training)
 # -------------------------------

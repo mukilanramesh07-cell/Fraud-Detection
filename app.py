@@ -5,6 +5,16 @@ import pickle
 # -------------------------------
 # Load model & scaler
 # -------------------------------
+import os
+
+if not os.path.exists("model.pkl"):
+    st.error("model.pkl not found")
+    st.stop()
+
+if not os.path.exists("scaler.pkl"):
+    st.error("scaler.pkl not found")
+    st.stop()
+
 model = pickle.load(open("model.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
 
